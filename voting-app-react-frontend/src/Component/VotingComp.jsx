@@ -79,6 +79,14 @@ const VotingComp = () => {
       setOptions(newOptions);
     }
 
+     // Function to handle removal of an option
+     function removeOption(index) {
+        if(index>1){
+           const newOptions = options.filter((_, i) => i !== index);
+           setOptions(newOptions);
+        }
+    }
+
 
     // useEffect(()=>{
     //   setPolls([
@@ -133,9 +141,11 @@ const VotingComp = () => {
                                 </input>
                             </div>
 
+                            <div>
+
                             {
                             options.map((option, index) => (
-                                <div className='form-group mt-3' key={index}>
+                                <div className='form-group mt-3' key={index} style={{display:'flex'}}>
                                     <input
                                         type='text'
                                         placeholder={`Option ${index + 1}`}
@@ -144,8 +154,15 @@ const VotingComp = () => {
                                         className={`form-control`}
                                         onChange={(e) => handleOptionChange(e, index)} // Update individual option
                                     />
+                                    <button
+                                            type='button'
+                                            className='btn btn-danger btn-sm'
+                                            onClick={() => removeOption(index)}
+                                      >  Remove </button>
                                 </div>
                             ))}
+
+                         </div>
                         
 
                             <span>
